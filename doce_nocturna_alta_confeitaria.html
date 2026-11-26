@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doce Nocturna | Alta Confeitaria & Doces Finos</title>
+    
+    <!-- Google Fonts: Cormorant Garamond (Serifa Editorial) & Plus Jakarta Sans (Clean Sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Configuração personalizada do Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cacau: {
+                            950: '#160D08',
+                            900: '#21140D',
+                            800: '#321F15',
+                            700: '#4A2F21',
+                            600: '#654230',
+                        },
+                        baunilha: {
+                            50: '#FDFBF7',
+                            100: '#F8F2E9',
+                            200: '#EFE3D1',
+                            300: '#E2CEB1',
+                        },
+                        caramelo: {
+                            300: '#E5C384',
+                            400: '#D4A359',
+                            500: '#B88339',
+                            600: '#966524',
+                        },
+                        terracota: {
+                            400: '#C87D6B',
+                            500: '#B36350',
+                            600: '#8F4838',
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 20px 40px -15px rgba(22, 13, 8, 0.08)',
+                        'gold': '0 10px 30px -10px rgba(212, 163, 89, 0.35)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Estilos Customizados para Animações e Scrollbar -->
+    <style>
+        body {
+            background-color: #FDFBF7;
+            color: #21140D;
+            overflow-x: hidden;
+        }
+
+        /* Scrollbar refinada */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F8F2E9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4A2F21;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #D4A359;
+        }
+
+        /* Animações suaves ao rolar (Reveal) */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: all 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Efeito de brilho sutil em botões dourados */
+        .btn-gold {
+            background: linear-gradient(135deg, #D4A359 0%, #B88339 100%);
+            transition: all 0.3s ease;
+        }
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px -8px rgba(212, 163, 89, 0.5);
+        }
+
+        /* Padrão decorativo sutil de fundo */
+        .bg-pattern-dark {
+            background-color: #160D08;
+            background-image: radial-gradient(rgba(212, 163, 89, 0.08) 1px, transparent 1px);
+            background-size: 28px 28px;
+        }
+
+        /* Transição do Drawer do Carrinho */
+        .drawer-backdrop {
+            transition: opacity 0.35s ease, visibility 0.35s ease;
+        }
+        .drawer-panel {
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-caramelo-400 selection:text-cacau-950">
+
+    <!-- ==================== 1. HEADER FIXO ==================== -->
+    <header id="main-header" class="fixed top-0 left-0 right-0 z-40 transition-all duration-300 bg-cacau-950/90 backdrop-blur-md border-b border-caramelo-400/15">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Marca / Logo -->
+                <a href="#inicio" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 rounded-full border border-caramelo-400/60 flex items-center justify-center bg-cacau-900 group-hover:border-caramelo-300 transition-colors">
+                        <i data-lucide="sparkles" class="w-5 h-5 text-caramelo-400"></i>
+                    </div>
+                    <div>
+                        <span class="font-serif text-2xl sm:text-3xl font-semibold tracking-wide text-baunilha-50 block leading-none">
+                            Doce Nocturna
+                        </span>
+                        <span class="text-[10px] uppercase tracking-[0.28em] text-caramelo-400 block mt-0.5">
+                            Haute Pâtisserie
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Navegação Desktop -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#inicio" class="text-sm font-medium text-baunilha-200 hover:text-caramelo-400 transition-colors">Início</a>
+                    <a href="#sobre" class="text-sm font-medium text-baunilha-200 hover:text-caramelo-400 transition-colors">Nossa História</a>
+                    <a href="#cardapio" class="text-sm font-medium text-baunilha-200 hover:text-caramelo-400 transition-colors">Cardápio</a>
+                    <a href="#encomendas" class="text-sm font-medium text-baunilha-200 hover:text-caramelo-400 transition-colors">Eventos & Sob Medida</a>
+                    <a href="#contato" class="text-sm font-medium text-baunilha-200 hover:text-caramelo-400 transition-colors">Contato</a>
+                </nav>
+
+                <!-- Ações: Carrinho + CTA Encomendar + Menu Mobile -->
+                <div class="flex items-center gap-3 sm:gap-4">
+                    <!-- Botão Carrinho -->
+                    <button id="open-cart-btn" aria-label="Abrir sacola de pedidos" class="relative p-2.5 rounded-full bg-cacau-900 border border-caramelo-400/30 text-baunilha-100 hover:border-caramelo-400 hover:text-caramelo-400 transition-all">
+                        <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                        <span id="cart-badge" class="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-terracota-500 text-white text-xs font-semibold flex items-center justify-center shadow-md transform scale-0 transition-transform duration-200">
+                            0
+                        </span>
+                    </button>
+
+                    <!-- Botão Destaque Encomendar -->
+                    <a href="#encomendas" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full btn-gold text-cacau-950 font-semibold text-sm shadow-gold">
+                        <span>Encomendar</span>
+                        <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                    </a>
+
+                    <!-- Botão Menu Mobile -->
+                    <button id="mobile-menu-btn" aria-label="Abrir menu" class="md:hidden p-2.5 rounded-xl text-baunilha-100 hover:bg-cacau-800 transition-colors">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Menu Mobile Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-cacau-950 border-b border-caramelo-400/20 px-4 pt-2 pb-6 space-y-2">
+            <a href="#inicio" class="mobile-link block px-4 py-3 rounded-xl text-baunilha-100 hover:bg-cacau-900 hover:text-caramelo-400 font-medium">Início</a>
+            <a href="#sobre" class="mobile-link block px-4 py-3 rounded-xl text-baunilha-100 hover:bg-cacau-900 hover:text-caramelo-400 font-medium">Nossa História</a>
+            <a href="#cardapio" class="mobile-link block px-4 py-3 rounded-xl text-baunilha-100 hover:bg-cacau-900 hover:text-caramelo-400 font-medium">Cardápio Artesanal</a>
+            <a href="#encomendas" class="mobile-link block px-4 py-3 rounded-xl text-baunilha-100 hover:bg-cacau-900 hover:text-caramelo-400 font-medium">Eventos & Encomendas</a>
+            <a href="#contato" class="mobile-link block px-4 py-3 rounded-xl text-baunilha-100 hover:bg-cacau-900 hover:text-caramelo-400 font-medium">Contato & Localização</a>
+            <div class="pt-2 px-4">
+                <a href="#cardapio" class="mobile-link w-full flex items-center justify-center gap-2 py-3 rounded-full btn-gold text-cacau-950 font-semibold text-sm">
+                    Fazer Pedido Agora
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== 2. HERO SECTION ==================== -->
+    <section id="inicio" class="relative min-h-screen flex items-center pt-20 bg-cacau-950 overflow-hidden">
+        <!-- Imagem de Fundo com Overlay Escuro Sofisticado -->
+        <div class="absolute inset-0 z-0">
+            <img 
+                src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1920&q=85" 
+                onerror="this.src='https://placehold.co/1920x1080/160D08/D4A359?text=Doce+Nocturna'"
+                alt="Entremet de chocolate escuro e ouro comestível" 
+                class="w-full h-full object-cover object-center opacity-45 scale-105 transition-transform duration-1000"
+            >
+            <div class="absolute inset-0 bg-gradient-to-r from-cacau-950 via-cacau-950/85 to-cacau-950/40"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-cacau-950 via-transparent to-cacau-950/60"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 w-full">
+            <div class="max-w-2xl">
+                <!-- Selo Superior -->
+                <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-cacau-900/90 border border-caramelo-400/30 mb-6 backdrop-blur-sm">
+                    <span class="w-2 h-2 rounded-full bg-caramelo-400 animate-pulse"></span>
+                    <span class="text-xs uppercase tracking-[0.22em] text-caramelo-300 font-medium">
+                        Confeitaria Botânica & Cacau de Origem
+                    </span>
+                </div>
+
+                <!-- Título Editorial -->
+                <h1 class="font-serif text-5xl sm:text-6xl lg:text-7xl font-semibold text-baunilha-50 leading-[1.08] tracking-tight mb-6">
+                    Onde o cacau intenso encontra a <span class="italic text-caramelo-400 font-normal">delicadeza</span> francesa.
+                </h1>
+
+                <!-- Subtítulo -->
+                <p class="text-base sm:text-lg text-baunilha-200/90 leading-relaxed mb-10 font-light max-w-xl">
+                    Criações autorais esculpidas diariamente com chocolate belga 70%, favas de baunilha de Madagascar e frutas frescas da estação. Uma experiência sensorial pensada para celebrar momentos inesquecíveis.
+                </p>
+
+                <!-- Botões de Ação -->
+                <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+                    <a href="#cardapio" class="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full btn-gold text-cacau-950 font-semibold text-base shadow-gold">
+                        <span>Explorar Cardápio</span>
+                        <i data-lucide="utensils" class="w-4 h-4"></i>
+                    </a>
+                    <a href="#encomendas" class="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full bg-cacau-900/80 hover:bg-cacau-800 text-baunilha-50 border border-baunilha-200/25 hover:border-caramelo-400/60 font-medium text-base transition-all backdrop-blur-sm">
+                        <span>Encomendas Sob Medida</span>
+                        <i data-lucide="calendar-heart" class="w-4 h-4 text-caramelo-400"></i>
+                    </a>
+                </div>
+
+                <!-- Destaques Rápidos -->
+                <div class="grid grid-cols-3 gap-6 mt-14 pt-8 border-t border-baunilha-200/15 max-w-lg">
+                    <div>
+                        <p class="font-serif text-2xl sm:text-3xl font-semibold text-caramelo-400">100%</p>
+                        <p class="text-xs text-baunilha-300 mt-1">Chocolate Belga & Cacau Fino</p>
+                    </div>
+                    <div>
+                        <p class="font-serif text-2xl sm:text-3xl font-semibold text-caramelo-400">Diária</p>
+                        <p class="text-xs text-baunilha-300 mt-1">Produção Fresca & Artesanal</p>
+                    </div>
+                    <div>
+                        <p class="font-serif text-2xl sm:text-3xl font-semibold text-caramelo-400">4.9 ★</p>
+                        <p class="text-xs text-baunilha-300 mt-1">Avaliação dos Clientes</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 3. NOSSA HISTÓRIA / SOBRE ==================== -->
+    <section id="sobre" class="py-24 lg:py-32 bg-baunilha-50 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+                
+                <!-- Composição de Imagens -->
+                <div class="lg:col-span-6 reveal">
+                    <div class="relative">
+                        <div class="rounded-3xl overflow-hidden shadow-soft aspect-[4/5] bg-cacau-900">
+                            <img 
+                                src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=1000&q=80" 
+                                onerror="this.src='https://placehold.co/800x1000/321F15/F8F2E9?text=Atelier+Doce+Nocturna'"
+                                alt="Confeiteira finalizando doce artesanal" 
+                                class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                            >
+                        </div>
+                        
+                        <!-- Card Flutuante Decorativo -->
+                        <div class="hidden sm:block absolute -bottom-8 -right-6 bg-cacau-950 text-baunilha-50 p-6 rounded-2xl shadow-xl border border-caramelo-400/25 max-w-xs">
+                            <div class="flex items-center gap-3 mb-2">
+                                <div class="w-9 h-9 rounded-full bg-caramelo-400/15 flex items-center justify-center text-caramelo-400">
+                                    <i data-lucide="award" class="w-5 h-5"></i>
+                                </div>
+                                <span class="font-serif text-lg font-semibold text-caramelo-300">Savoir-Faire Francês</span>
+                            </div>
+                            <p class="text-xs text-baunilha-200/80 leading-relaxed">
+                                Cada receita passa por até 48 horas de maturação e equilíbrio térmico para revelar notas aromáticas puras sem dulçor excessivo.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Narrativa e Pilares -->
+                <div class="lg:col-span-6 reveal">
+                    <span class="text-xs uppercase tracking-[0.25em] text-terracota-500 font-semibold block mb-3">
+                        Nossa Essência
+                    </span>
+                    <h2 class="font-serif text-4xl sm:text-5xl font-semibold text-cacau-950 leading-tight mb-6">
+                        A arte da confeitaria elevada à <span class="italic text-caramelo-600">alta gastronomia.</span>
+                    </h2>
+                    <p class="text-cacau-700 text-base sm:text-lg leading-relaxed mb-6">
+                        Nascida da paixão pelas clássicas <em>pâtisseries</em> parisienses e pela riqueza do cacau brasileiro de origem controlada, a <strong>Doce Nocturna</strong> transforma ingredientes nobres em pequenas joias comestíveis.
+                    </p>
+                    <p class="text-cacau-700/90 text-base leading-relaxed mb-10">
+                        Rejeitamos pré-misturas e conservantes industriais. Aqui, o caramelo é cozido lentamente em tachos de cobre, as amêndoas são torradas na hora para nossos pralinés e cada entremet recebe acabamento manual minucioso.
+                    </p>
+
+                    <!-- 3 Pilares -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-6 border-t border-cacau-900/10">
+                        <div class="bg-baunilha-100/80 p-5 rounded-2xl border border-cacau-900/5">
+                            <i data-lucide="bean" class="w-6 h-6 text-caramelo-600 mb-3"></i>
+                            <h3 class="font-serif text-xl font-semibold text-cacau-950 mb-1">Cacau Selecionado</h3>
+                            <p class="text-xs text-cacau-700 leading-relaxed">Blends exclusivos belgas e amêndoas de cacau fino do sul da Bahia.</p>
+                        </div>
+                        <div class="bg-baunilha-100/80 p-5 rounded-2xl border border-cacau-900/5">
+                            <i data-lucide="flame" class="w-6 h-6 text-terracota-500 mb-3"></i>
+                            <h3 class="font-serif text-xl font-semibold text-cacau-950 mb-1">Técnica Clássica</h3>
+                            <p class="text-xs text-cacau-700 leading-relaxed">Temperagem precisa, folhados com manteiga de tourage e cremes leves.</p>
+                        </div>
+                        <div class="bg-baunilha-100/80 p-5 rounded-2xl border border-cacau-900/5">
+                            <i data-lucide="clock" class="w-6 h-6 text-caramelo-600 mb-3"></i>
+                            <h3 class="font-serif text-xl font-semibold text-cacau-950 mb-1">Fornada Diária</h3>
+                            <p class="text-xs text-cacau-700 leading-relaxed">Produção limitada todas as manhãs garantindo textura e frescor máximos.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 4. CARDÁPIO INTERATIVO ==================== -->
+    <section id="cardapio" class="py-24 lg:py-32 bg-baunilha-100 border-y border-cacau-900/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Cabeçalho da Seção -->
+            <div class="text-center max-w-2xl mx-auto mb-12 reveal">
+                <span class="text-xs uppercase tracking-[0.25em] text-terracota-500 font-semibold block mb-3">
+                    Vitrine Sazonal
+                </span>
+                <h2 class="font-serif text-4xl sm:text-5xl font-semibold text-cacau-950 mb-4">
+                    Nosso Cardápio Autoral
+                </h2>
+                <p class="text-cacau-700 text-base">
+                    Selecione suas criações favoritas para entrega imediata ou retirada em nosso atelier.
+                </p>
+            </div>
+
+            <!-- Filtros por Categoria -->
+            <div id="category-filters" class="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 mb-12 reveal">
+                <button data-category="todos" class="filter-btn active px-5 py-2.5 rounded-full text-sm font-medium transition-all bg-cacau-950 text-baunilha-50 shadow-md">
+                    Todos os Sabores
+                </button>
+                <button data-category="bolos" class="filter-btn px-5 py-2.5 rounded-full text-sm font-medium transition-all bg-baunilha-50 text-cacau-800 hover:bg-cacau-900 hover:text-baunilha-50 border border-cacau-900/10">
+                    Bolos & Tortas
+                </button>
+                <button data-category="doces-finos" class="filter-btn px-5 py-2.5 rounded-full text-sm font-medium transition-all bg-baunilha-50 text-cacau-800 hover:bg-cacau-900 hover:text-baunilha-50 border border-cacau-900/10">
+                    Doces Finos
+                </button>
+                <button data-category="chocolates" class="filter-btn px-5 py-2.5 rounded-full text-sm font-medium transition-all bg-baunilha-50 text-cacau-800 hover:bg-cacau-900 hover:text-baunilha-50 border border-cacau-900/10">
+                    Chocolates & Trufas
+                </button>
+                <button data-category="bebidas" class="filter-btn px-5 py-2.5 rounded-full text-sm font-medium transition-all bg-baunilha-50 text-cacau-800 hover:bg-cacau-900 hover:text-baunilha-50 border border-cacau-900/10">
+                    Bebidas & Cafés
+                </button>
+            </div>
+
+            <!-- Grid de Produtos (Renderizado via JavaScript) -->
+            <div id="menu-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Cards injetados dinamicamente -->
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ==================== 5. ENCOMENDAS PERSONALIZADAS & EVENTOS ==================== -->
+    <section id="encomendas" class="py-24 lg:py-32 bg-pattern-dark text-baunilha-50 relative overflow-hidden">
+        <!-- Detalhe de brilho sutil -->
+        <div class="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-caramelo-500/10 blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-40 -left-40 w-96 h-96 rounded-full bg-terracota-500/10 blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+                
+                <!-- Coluna Esquerda: Informações de Eventos -->
+                <div class="lg:col-span-5 reveal">
+                    <span class="text-xs uppercase tracking-[0.25em] text-caramelo-400 font-semibold block mb-3">
+                        Atelier Sob Medida
+                    </span>
+                    <h2 class="font-serif text-4xl sm:text-5xl font-semibold text-baunilha-50 leading-tight mb-6">
+                        Mesas de doces & bolos para <span class="italic text-caramelo-400 font-normal">grandes celebrações.</span>
+                    </h2>
+                    <p class="text-baunilha-200/85 text-base leading-relaxed mb-8">
+                        Projetamos experiências açucaradas exclusivas para casamentos, recepções intimistas, aniversários e eventos corporativos de alto padrão.
+                    </p>
+
+                    <div class="space-y-5 mb-10">
+                        <div class="flex items-start gap-4 p-4 rounded-2xl bg-cacau-900/70 border border-caramelo-400/15">
+                            <div class="w-10 h-10 rounded-xl bg-caramelo-400/15 flex items-center justify-center text-caramelo-400 shrink-0 mt-0.5">
+                                <i data-lucide="gem" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-serif text-xl font-semibold text-baunilha-50">Degustação Privativa</h3>
+                                <p class="text-xs sm:text-sm text-baunilha-300 mt-1">Agende uma sessão harmonizada em nosso salão para escolher recheios, texturas e acabamentos.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 rounded-2xl bg-cacau-900/70 border border-caramelo-400/15">
+                            <div class="w-10 h-10 rounded-xl bg-terracota-500/20 flex items-center justify-center text-terracota-400 shrink-0 mt-0.5">
+                                <i data-lucide="gift" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-serif text-xl font-semibold text-baunilha-50">Presentes Corporativos</h3>
+                                <p class="text-xs sm:text-sm text-baunilha-300 mt-1">Caixas rígidas com gravação em hot-stamping dourado e bombons personalizados com sua identidade.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-5 rounded-2xl bg-cacau-900/40 border border-baunilha-200/10 text-xs text-baunilha-300 flex items-center gap-3">
+                        <i data-lucide="info" class="w-5 h-5 text-caramelo-400 shrink-0"></i>
+                        <span>Recomendamos antecedência mínima de 7 dias para bolos artísticos e 20 dias para eventos acima de 80 convidados.</span>
+                    </div>
+                </div>
+
+                <!-- Coluna Direita: Formulário Interativo de Orçamento -->
+                <div class="lg:col-span-7 reveal">
+                    <div class="bg-cacau-900/90 backdrop-blur-md p-6 sm:p-10 rounded-3xl border border-caramelo-400/25 shadow-2xl">
+                        <h3 class="font-serif text-2xl sm:text-3xl font-semibold text-baunilha-50 mb-2">
+                            Solicitar Proposta Personalizada
+                        </h3>
+                        <p class="text-sm text-baunilha-300 mb-8">
+                            Preencha os detalhes abaixo e nossa equipe de atendimento retornará em até 4 horas úteis.
+                        </p>
+
+                        <!-- Formulário -->
+                        <form id="custom-order-form" class="space-y-5">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                                <div>
+                                    <label for="client-name" class="block text-xs uppercase tracking-wider text-baunilha-200 mb-2">Nome Completo *</label>
+                                    <input type="text" id="client-name" required placeholder="Ex: Marina Vasconcelos" class="w-full px-4 py-3 rounded-xl bg-cacau-950/90 border border-caramelo-400/25 text-baunilha-50 placeholder-baunilha-300/40 focus:outline-none focus:border-caramelo-400 transition-colors text-sm">
+                                </div>
+                                <div>
+                                    <label for="client-contact" class="block text-xs uppercase tracking-wider text-baunilha-200 mb-2">WhatsApp ou E-mail *</label>
+                                    <input type="text" id="client-contact" required placeholder="(11) 99999-0000" class="w-full px-4 py-3 rounded-xl bg-cacau-950/90 border border-caramelo-400/25 text-baunilha-50 placeholder-baunilha-300/40 focus:outline-none focus:border-caramelo-400 transition-colors text-sm">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+                                <div>
+                                    <label for="event-date" class="block text-xs uppercase tracking-wider text-baunilha-200 mb-2">Data do Evento *</label>
+                                    <input type="date" id="event-date" required class="w-full px-4 py-3 rounded-xl bg-cacau-950/90 border border-caramelo-400/25 text-baunilha-50 focus:outline-none focus:border-caramelo-400 transition-colors text-sm">
+                                </div>
+                                <div>
+                                    <label for="event-type" class="block text-xs uppercase tracking-wider text-baunilha-200 mb-2">Tipo de Ocasião *</label>
+                                    <select id="event-type" required class="w-full px-4 py-3 rounded-xl bg-cacau-950/90 border border-caramelo-400/25 text-baunilha-50 focus:outline-none focus:border-caramelo-400 transition-colors text-sm">
+                                        <option value="Casamento / Mini Wedding">Casamento / Mini Wedding</option>
+                                        <option value="Aniversário / Celebração">Aniversário / Celebração</option>
+                                        <option value="Evento Corporativo">Evento Corporativo</option>
+                                        <option value="Bolo Esculpido Sob Medida">Bolo Esculpido Sob Medida</option>
+                                        <option value="Presentes & Lembranças">Presentes & Lembranças</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="guest-count" class="block text-xs uppercase tracking-wider text-baunilha-200 mb-2">Nº de Convidados *</label>
+                                    <input type="number" id="guest-count" min="10" max="1000" required placeholder="Ex: 60" class="w-full px-4 py-3 rounded-xl bg-cacau-950/90 border border-caramelo-400/25 text-baunilha-50 placeholder-baunilha-300/40 focus:outline-none focus:border-caramelo-400 transition-colors text-sm">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="event-notes" class="block text-xs uppercase tracking-wider text-baunilha-200 mb-2">Sabores desejados, restrições ou inspiração</label>
+                                <textarea id="event-notes" rows="3" placeholder="Conte-nos sobre o estilo da sua festa, sabores preferidos (ex: pistache, frutas vermelhas, chocolate amargo) ou restrições alimentares..." class="w-full px-4 py-3 rounded-xl bg-cacau-950/90 border border-caramelo-400/25 text-baunilha-50 placeholder-baunilha-300/40 focus:outline-none focus:border-caramelo-400 transition-colors text-sm resize-none"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full py-4 rounded-full btn-gold text-cacau-950 font-semibold text-base shadow-gold flex items-center justify-center gap-2 cursor-pointer">
+                                <span>Enviar Solicitação de Orçamento</span>
+                                <i data-lucide="send" class="w-4 h-4"></i>
+                            </button>
+                        </form>
+
+                        <!-- Feedback Visual de Envio (Oculto inicialmente) -->
+                        <div id="form-success-box" class="hidden mt-6 p-6 rounded-2xl bg-emerald-950/80 border border-emerald-500/40 text-emerald-100">
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0">
+                                    <i data-lucide="check-circle-2" class="w-6 h-6"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-serif text-xl font-semibold text-white">Solicitação Recebida com Carinho!</h4>
+                                    <p id="form-success-text" class="text-sm text-emerald-200/90 mt-1 leading-relaxed">
+                                        Recebemos os dados do seu evento. Nossa chef pâtissière preparará uma sugestão exclusiva e entrará em contato em breve.
+                                    </p>
+                                    <button id="reset-form-btn" type="button" class="mt-4 text-xs uppercase tracking-wider font-semibold text-caramelo-300 hover:text-caramelo-400 underline">
+                                        Enviar nova solicitação
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 6. DEPOIMENTOS DE CLIENTES ==================== -->
+    <section class="py-24 bg-baunilha-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+                <span class="text-xs uppercase tracking-[0.25em] text-terracota-500 font-semibold block mb-3">
+                    Experiências Reais
+                </span>
+                <h2 class="font-serif text-4xl sm:text-5xl font-semibold text-cacau-950">
+                    Palavras de quem já saboreou
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Depoimento 1 -->
+                <div class="bg-baunilha-100/70 p-8 rounded-3xl border border-cacau-900/10 shadow-soft flex flex-col justify-between reveal">
+                    <div>
+                        <div class="flex items-center gap-1 text-caramelo-500 mb-5">
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        </div>
+                        <p class="font-serif italic text-xl text-cacau-900 leading-relaxed mb-6">
+                            “O Entremet Nocturna 70% foi o ponto alto do nosso jantar de noivado. A textura aveludada da mousse e o crocante de avelã são simplesmente inesquecíveis. Doçura na medida exata!”
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-3.5 pt-4 border-t border-cacau-900/10">
+                        <div class="w-11 h-11 rounded-full bg-cacau-800 text-caramelo-300 font-serif font-semibold flex items-center justify-center text-lg">
+                            CM
+                        </div>
+                        <div>
+                            <p class="font-semibold text-sm text-cacau-950">Camila Monteiro</p>
+                            <p class="text-xs text-cacau-600">Jardins, São Paulo</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Depoimento 2 -->
+                <div class="bg-baunilha-100/70 p-8 rounded-3xl border border-cacau-900/10 shadow-soft flex flex-col justify-between reveal">
+                    <div>
+                        <div class="flex items-center gap-1 text-caramelo-500 mb-5">
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        </div>
+                        <p class="font-serif italic text-xl text-cacau-900 leading-relaxed mb-6">
+                            “Encomendamos 120 caixas de trufas artesanais para os clientes VIP do nosso escritório. A apresentação impecável e o aroma de baunilha natural encantaram a todos.”
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-3.5 pt-4 border-t border-cacau-900/10">
+                        <div class="w-11 h-11 rounded-full bg-terracota-600 text-baunilha-50 font-serif font-semibold flex items-center justify-center text-lg">
+                            RA
+                        </div>
+                        <div>
+                            <p class="font-semibold text-sm text-cacau-950">Rafael Alencar</p>
+                            <p class="text-xs text-cacau-600">Diretor Criativo</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Depoimento 3 -->
+                <div class="bg-baunilha-100/70 p-8 rounded-3xl border border-cacau-900/10 shadow-soft flex flex-col justify-between reveal">
+                    <div>
+                        <div class="flex items-center gap-1 text-caramelo-500 mb-5">
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        </div>
+                        <p class="font-serif italic text-xl text-cacau-900 leading-relaxed mb-6">
+                            “A Tartelette de Pistache Siciliano com Framboesa Fresca parece uma obra de arte. Tomar um espresso acompanhado dos macarons no atelier virou meu ritual favorito de sábado.”
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-3.5 pt-4 border-t border-cacau-900/10">
+                        <div class="w-11 h-11 rounded-full bg-caramelo-600 text-baunilha-50 font-serif font-semibold flex items-center justify-center text-lg">
+                            BL
+                        </div>
+                        <div>
+                            <p class="font-semibold text-sm text-cacau-950">Beatriz Lins</p>
+                            <p class="text-xs text-cacau-600">Arquiteta</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 7. RODAPÉ, LOCALIZAÇÃO & CONTATO ==================== -->
+    <footer id="contato" class="bg-cacau-950 text-baunilha-200 border-t border-caramelo-400/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+                
+                <!-- Coluna 1: Marca -->
+                <div>
+                    <div class="flex items-center gap-3 mb-5">
+                        <div class="w-9 h-9 rounded-full border border-caramelo-400/60 flex items-center justify-center bg-cacau-900">
+                            <i data-lucide="sparkles" class="w-4 h-4 text-caramelo-400"></i>
+                        </div>
+                        <span class="font-serif text-2xl font-semibold text-baunilha-50">Doce Nocturna</span>
+                    </div>
+                    <p class="text-sm text-baunilha-300/80 leading-relaxed mb-6">
+                        Confeitaria artesanal contemporânea dedicada ao cacau de origem, técnicas francesas e celebrações memoráveis.
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <a href="#contato" aria-label="Instagram" class="w-10 h-10 rounded-full bg-cacau-900 border border-caramelo-400/25 flex items-center justify-center text-baunilha-100 hover:border-caramelo-400 hover:text-caramelo-400 transition-colors">
+                            <i data-lucide="instagram" class="w-4 h-4"></i>
+                        </a>
+                        <a href="#contato" aria-label="WhatsApp" class="w-10 h-10 rounded-full bg-cacau-900 border border-caramelo-400/25 flex items-center justify-center text-baunilha-100 hover:border-caramelo-400 hover:text-caramelo-400 transition-colors">
+                            <i data-lucide="message-circle" class="w-4 h-4"></i>
+                        </a>
+                        <a href="mailto:contato@docenocturna.com.br" aria-label="E-mail" class="w-10 h-10 rounded-full bg-cacau-900 border border-caramelo-400/25 flex items-center justify-center text-baunilha-100 hover:border-caramelo-400 hover:text-caramelo-400 transition-colors">
+                            <i data-lucide="mail" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Coluna 2: Endereço & Salão -->
+                <div>
+                    <h4 class="font-serif text-xl font-semibold text-caramelo-300 mb-5">Nosso Atelier</h4>
+                    <ul class="space-y-3 text-sm text-baunilha-200/85">
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="map-pin" class="w-4 h-4 text-caramelo-400 shrink-0 mt-1"></i>
+                            <span>Alameda Lorena, 1482 — Jardins<br>São Paulo, SP — CEP 01424-001</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="car" class="w-4 h-4 text-caramelo-400 shrink-0"></i>
+                            <span>Valet disponível na porta e retirada expressa</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Coluna 3: Horário de Funcionamento -->
+                <div>
+                    <h4 class="font-serif text-xl font-semibold text-caramelo-300 mb-5">Horários</h4>
+                    <ul class="space-y-2.5 text-sm text-baunilha-200/85">
+                        <li class="flex justify-between border-b border-baunilha-200/10 pb-2">
+                            <span>Terça a Sexta</span>
+                            <span class="text-baunilha-50 font-medium">10h00 – 20h00</span>
+                        </li>
+                        <li class="flex justify-between border-b border-baunilha-200/10 pb-2">
+                            <span>Sábados</span>
+                            <span class="text-baunilha-50 font-medium">10h00 – 21h00</span>
+                        </li>
+                        <li class="flex justify-between border-b border-baunilha-200/10 pb-2">
+                            <span>Domingos & Feriados</span>
+                            <span class="text-baunilha-50 font-medium">11h00 – 18h00</span>
+                        </li>
+                        <li class="text-xs text-terracota-400 pt-1">
+                            * Segundas: fechado para produção interna.
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Coluna 4: Contato Direto -->
+                <div>
+                    <h4 class="font-serif text-xl font-semibold text-caramelo-300 mb-5">Atendimento</h4>
+                    <ul class="space-y-3 text-sm text-baunilha-200/85">
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="phone" class="w-4 h-4 text-caramelo-400 shrink-0"></i>
+                            <span>(11) 3082-9410</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="smartphone" class="w-4 h-4 text-caramelo-400 shrink-0"></i>
+                            <span>(11) 99482-7710 (WhatsApp)</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="mail" class="w-4 h-4 text-caramelo-400 shrink-0"></i>
+                            <span>eventos@docenocturna.com.br</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="mt-16 pt-8 border-t border-baunilha-200/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-baunilha-300/60">
+                <p>© 2026 Doce Nocturna Alta Confeitaria Ltda. Todos os direitos reservados.</p>
+                <p>Feito artesanalmente com cacau fino e paixão.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== DRAWER LATERAL DO CARRINHO / PEDIDO ==================== -->
+    <div id="cart-drawer-wrapper" class="fixed inset-0 z-50 invisible pointer-events-none">
+        <!-- Backdrop -->
+        <div id="cart-backdrop" class="drawer-backdrop fixed inset-0 bg-cacau-950/75 backdrop-blur-sm opacity-0"></div>
+        
+        <!-- Painel Lateral -->
+        <aside id="cart-panel" class="drawer-panel fixed top-0 right-0 bottom-0 w-full max-w-md bg-baunilha-50 text-cacau-950 shadow-2xl transform translate-x-full flex flex-col justify-between pointer-events-auto">
+            
+            <!-- Cabeçalho do Carrinho -->
+            <div class="p-6 bg-cacau-950 text-baunilha-50 flex items-center justify-between border-b border-caramelo-400/20">
+                <div class="flex items-center gap-3">
+                    <i data-lucide="shopping-bag" class="w-5 h-5 text-caramelo-400"></i>
+                    <div>
+                        <h3 class="font-serif text-2xl font-semibold leading-none">Sua Seleção</h3>
+                        <p class="text-xs text-baunilha-300 mt-1">Entrega refrigerada ou retirada no atelier</p>
+                    </div>
+                </div>
+                <button id="close-cart-btn" aria-label="Fechar carrinho" class="p-2 rounded-full hover:bg-cacau-800 text-baunilha-200 hover:text-white transition-colors">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <!-- Lista de Itens -->
+            <div id="cart-items-container" class="flex-1 overflow-y-auto p-6 space-y-4">
+                <!-- Itens renderizados via JavaScript -->
+            </div>
+
+            <!-- Rodapé do Carrinho (Subtotal + Finalizar) -->
+            <div id="cart-footer" class="p-6 bg-baunilha-100 border-t border-cacau-900/10">
+                <div class="space-y-2 mb-5">
+                    <div class="flex justify-between text-sm text-cacau-700">
+                        <span>Subtotal</span>
+                        <span id="cart-subtotal" class="font-medium">R$ 0,00</span>
+                    </div>
+                    <div class="flex justify-between text-xs text-cacau-600">
+                        <span>Embalagem térmica presenteável</span>
+                        <span class="text-emerald-700 font-medium">Cortesia</span>
+                    </div>
+                    <div class="flex justify-between text-lg font-serif font-bold text-cacau-950 pt-2 border-t border-cacau-900/10">
+                        <span>Total Estimado</span>
+                        <span id="cart-total">R$ 0,00</span>
+                    </div>
+                </div>
+
+                <!-- Opção de Recebimento -->
+                <div class="grid grid-cols-2 gap-2 mb-4">
+                    <button type="button" data-delivery="Retirada no Atelier" class="delivery-option active py-2 px-3 rounded-xl text-xs font-semibold border border-cacau-950 bg-cacau-950 text-baunilha-50 transition-all">
+                        Retirar no Atelier
+                    </button>
+                    <button type="button" data-delivery="Entrega Expressa" class="delivery-option py-2 px-3 rounded-xl text-xs font-semibold border border-cacau-900/20 bg-baunilha-50 text-cacau-800 hover:border-cacau-950 transition-all">
+                        Entrega em Casa
+                    </button>
+                </div>
+
+                <button id="checkout-btn" class="w-full py-4 rounded-full btn-gold text-cacau-950 font-semibold text-sm shadow-gold flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
+                    <span>Confirmar Encomenda</span>
+                    <i data-lucide="check" class="w-4 h-4"></i>
+                </button>
+            </div>
+        </aside>
+    </div>
+
+    <!-- ==================== MODAL DE CONFIRMAÇÃO DE PEDIDO (Substitui alert) ==================== -->
+    <div id="order-confirmation-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-cacau-950/80 backdrop-blur-sm">
+        <div class="bg-baunilha-50 rounded-3xl max-w-md w-full p-8 text-center shadow-2xl border border-caramelo-400/30 transform scale-95 transition-transform">
+            <div class="w-16 h-16 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center mx-auto mb-5">
+                <i data-lucide="check-circle-2" class="w-9 h-9"></i>
+            </div>
+            <h3 class="font-serif text-3xl font-semibold text-cacau-950 mb-2">Pedido Registrado!</h3>
+            <p id="modal-order-summary" class="text-sm text-cacau-700 leading-relaxed mb-6">
+                Seu pedido foi enviado para nossa cozinha artesanal. Em instantes você receberá a confirmação do horário de preparo.
+            </p>
+            <div class="p-4 rounded-2xl bg-baunilha-100 border border-cacau-900/10 text-xs text-cacau-800 mb-6">
+                Código da Encomenda: <strong id="order-code" class="font-mono text-cacau-950 text-sm">#DN-8492</strong>
+            </div>
+            <button id="close-modal-btn" class="w-full py-3.5 rounded-full bg-cacau-950 text-baunilha-50 font-semibold text-sm hover:bg-cacau-800 transition-colors">
+                Continuar Navegando
+            </button>
+        </div>
+    </div>
+
+    <!-- ==================== TOAST NOTIFICATION ==================== -->
+    <div id="toast-notification" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 translate-y-4 transition-all duration-300">
+        <div class="bg-cacau-950 text-baunilha-50 px-5 py-3 rounded-full shadow-xl border border-caramelo-400/40 flex items-center gap-3 text-sm">
+            <span class="w-2 h-2 rounded-full bg-caramelo-400"></span>
+            <span id="toast-message">Item adicionado à sua seleção</span>
+        </div>
+    </div>
+
+    <!-- ==================== JAVASCRIPT (DADOS, CARRINHO, FILTROS E INTERAÇÕES) ==================== -->
+    <script>
+        // 1. Catálogo de Produtos da Doceria
+        const menuProducts = [
+            {
+                id: 1,
+                name: "Entremet Nocturna 70%",
+                category: "bolos",
+                categoryLabel: "Bolos & Tortas",
+                price: 168.00,
+                weight: "Serve 8 a 10 fatias",
+                tag: "Mais Pedido",
+                tagColor: "bg-caramelo-400 text-cacau-950",
+                description: "Mousse intensa de chocolate belga 70% cacau, biscuit de amêndoas torradas, crocante de praliné de avelã e glaçagem espelhada.",
+                image: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: 2,
+                name: "Tartelette Pistache & Framboesa",
+                category: "doces-finos",
+                categoryLabel: "Doces Finos",
+                price: 34.00,
+                weight: "Unidade (140g)",
+                tag: "Assinatura da Chef",
+                tagColor: "bg-terracota-500 text-white",
+                description: "Massa sablée amanteigada, creme mousseline de pistache siciliano puro, compota artesanal e framboesas frescas.",
+                image: "https://images.unsplash.com/photo-1519915028121-7d3463d20b13?auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: 3,
+                name: "Coffret Trufas de Origem (12 un.)",
+                category: "chocolates",
+                categoryLabel: "Chocolates & Trufas",
+                price: 96.00,
+                weight: "Caixa 220g",
+                tag: "Sem Glúten",
+                tagColor: "bg-emerald-800 text-emerald-100",
+                description: "Seleção de 12 trufas banhadas à mão: caramelo salgado com flor de sal, ganache de cumaru, café espresso e maracujá.",
+                image: "https://images.unsplash.com/photo-1548907040-4baa42d10919?auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: 4,
+                name: "Saint-Honoré Caramelo & Baunilha",
+                category: "bolos",
+                categoryLabel: "Bolos & Tortas",
+                price: 154.00,
+                weight: "Serve 8 fatias",
+                tag: "Clássico Francês",
+                tagColor: "bg-cacau-800 text-caramelo-300",
+                description: "Base de massa folhada caramelizada, carolinas recheadas com creme de baunilha de Madagascar e chantilly mascarpone.",
+                image: "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: 5,
+                name: "Éclair Ópera & Ouro",
+                category: "doces-finos",
+                categoryLabel: "Doces Finos",
+                price: 29.00,
+                weight: "Unidade (120g)",
+                tag: "Produção Limitada",
+                tagColor: "bg-caramelo-400 text-cacau-950",
+                description: "Massa choux aerada, creme diplomata de café arábica torrado, ganache meio amarga e folha de ouro comestível 24k.",
+                image: "https://images.unsplash.com/photo-1612203985729-70726954388c?auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: 6,
+                name: "Caixa Macarons Parisienses (8 un.)",
+                category: "doces-finos",
+                categoryLabel: "Doces Finos",
+                price: 74.00,
+                weight: "Caixa Presente",
+                tag: "Sem Glúten",
+                tagColor: "bg-emerald-800 text-emerald-100",
+                description: "Casquinhas delicadas de farinha de amêndoas nos sabores: rosas com lichia, caramelo salgado, pistache e chocolate intenso.",
+                image: "https://images.unsplash.com/photo-1569864358642-9d1684040f43?auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: 7,
+                name: "Tablete Cacau 75% & Flor de Sal",
+                category: "chocolates",
+                categoryLabel: "Chocolates & Trufas",
+                price: 46.00,
+                weight: "Barra 110g",
+                tag: "Vegano • Sem Glúten",
+                tagColor: "bg-emerald-800 text-emerald-100",
+                description: "Chocolate bean-to-bar de origem única com nibs de cacau caramelizados e cristais de flor de sal de Mossoró.",
+                image: "https://images.unsplash.com/photo-1606312619070-d48b4c652a52?auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: 8,
+                name: "Chocolat Chaud Parisiense",
+                category: "bebidas",
+                categoryLabel: "Bebidas & Cafés",
+                price: 26.00,
+                weight: "240ml (Para viagem)",
+                tag: "Especialidade",
+                tagColor: "bg-terracota-500 text-white",
+                description: "Chocolate quente espesso preparado com barras derretidas de chocolate 63% cacau, fava de baunilha e toque de chantilly fresco.",
+                image: "https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: 9,
+                name: "Cold Brew & Baunilha Tostada",
+                category: "bebidas",
+                categoryLabel: "Bebidas & Cafés",
+                price: 22.00,
+                weight: "300ml",
+                tag: "Refrescante",
+                tagColor: "bg-cacau-800 text-caramelo-300",
+                description: "Café especial extraído a frio por 18 horas, finalizado com xarope artesanal de baunilha e espuma sedosa de leite.",
+                image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=800&q=80"
+            }
+        ];
+
+        // Estado da Aplicação
+        let cart = [];
+        let activeCategory = "todos";
+        let selectedDeliveryMode = "Retirada no Atelier";
+
+        // Utilitário de Formatação Monetária (BRL)
+        function formatCurrency(value) {
+            return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        }
+
+        // Renderizar Cards do Cardápio
+        function renderMenu(category = "todos") {
+            const grid = document.getElementById("menu-grid");
+            const filtered = category === "todos" 
+                ? menuProducts 
+                : menuProducts.filter(item => item.category === category);
+
+            grid.innerHTML = filtered.map(product => `
+                <article class="group bg-baunilha-50 rounded-3xl overflow-hidden border border-cacau-900/10 shadow-soft hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <!-- Imagem + Tag -->
+                        <div class="relative h-60 overflow-hidden bg-cacau-900">
+                            <img 
+                                src="${product.image}" 
+                                onerror="this.src='https://placehold.co/800x600/321F15/D4A359?text=${encodeURIComponent(product.name)}'"
+                                alt="${product.name}" 
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                            >
+                            <div class="absolute inset-0 bg-gradient-to-t from-cacau-950/60 via-transparent to-transparent"></div>
+                            <span class="absolute top-4 left-4 px-3 py-1 rounded-full text-[11px] font-semibold tracking-wide shadow-md ${product.tagColor}">
+                                ${product.tag}
+                            </span>
+                            <span class="absolute bottom-3 right-4 text-xs text-baunilha-100/90 font-medium bg-cacau-950/70 backdrop-blur-sm px-2.5 py-1 rounded-lg">
+                                ${product.weight}
+                            </span>
+                        </div>
+
+                        <!-- Conteúdo -->
+                        <div class="p-6 pb-4">
+                            <span class="text-[11px] uppercase tracking-widest text-terracota-500 font-semibold">
+                                ${product.categoryLabel}
+                            </span>
+                            <h3 class="font-serif text-2xl font-semibold text-cacau-950 mt-1 mb-2 group-hover:text-caramelo-600 transition-colors">
+                                ${product.name}
+                            </h3>
+                            <p class="text-sm text-cacau-700 leading-relaxed">
+                                ${product.description}
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Preço + Botão Adicionar -->
+                    <div class="px-6 pb-6 pt-3 flex items-center justify-between border-t border-cacau-900/5 mt-2">
+                        <div>
+                            <span class="text-[11px] text-cacau-600 block">Valor</span>
+                            <span class="font-serif text-2xl font-bold text-cacau-950">${formatCurrency(product.price)}</span>
+                        </div>
+                        <button 
+                            onclick="addToCart(${product.id})" 
+                            class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-cacau-950 hover:bg-caramelo-500 text-baunilha-50 hover:text-cacau-950 font-medium text-sm transition-all cursor-pointer shadow-sm"
+                        >
+                            <i data-lucide="plus" class="w-4 h-4"></i>
+                            <span>Adicionar</span>
+                        </button>
+                    </div>
+                </article>
+            `).join("");
+
+            // Recarregar ícones Lucide nos novos elementos
+            lucide.createIcons();
+        }
+
+        // Configurar Filtros de Categoria
+        function setupCategoryFilters() {
+            const buttons = document.querySelectorAll(".filter-btn");
+            buttons.forEach(btn => {
+                btn.addEventListener("click", () => {
+                    // Atualizar estilo ativo
+                    buttons.forEach(b => {
+                        b.classList.remove("bg-cacau-950", "text-baunilha-50", "shadow-md");
+                        b.classList.add("bg-baunilha-50", "text-cacau-800", "border", "border-cacau-900/10");
+                    });
+                    btn.classList.remove("bg-baunilha-50", "text-cacau-800", "border", "border-cacau-900/10");
+                    btn.classList.add("bg-cacau-950", "text-baunilha-50", "shadow-md");
+
+                    activeCategory = btn.dataset.category;
+                    renderMenu(activeCategory);
+                });
+            });
+        }
+
+        // ==================== LÓGICA DO CARRINHO ====================
+        function addToCart(productId) {
+            const product = menuProducts.find(p => p.id === productId);
+            if (!product) return;
+
+            const existingItem = cart.find(item => item.id === productId);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+
+            updateCartUI();
+            showToast(`"${product.name}" adicionado à sacola`);
+        }
+
+        function updateItemQuantity(productId, delta) {
+            const itemIndex = cart.findIndex(item => item.id === productId);
+            if (itemIndex === -1) return;
+
+            cart[itemIndex].quantity += delta;
+            if (cart[itemIndex].quantity <= 0) {
+                cart.splice(itemIndex, 1);
+            }
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const container = document.getElementById("cart-items-container");
+            const badge = document.getElementById("cart-badge");
+            const subtotalEl = document.getElementById("cart-subtotal");
+            const totalEl = document.getElementById("cart-total");
+            const checkoutBtn = document.getElementById("checkout-btn");
+
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+            // Atualizar Badge do Header
+            badge.textContent = totalItems;
+            if (totalItems > 0) {
+                badge.classList.remove("scale-0");
+                badge.classList.add("scale-100");
+                checkoutBtn.disabled = false;
+            } else {
+                badge.classList.remove("scale-100");
+                badge.classList.add("scale-0");
+                checkoutBtn.disabled = true;
+            }
+
+            // Renderizar Itens
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="h-full flex flex-col items-center justify-center text-center py-12 px-4">
+                        <div class="w-16 h-16 rounded-full bg-baunilha-200/70 flex items-center justify-center text-cacau-600 mb-4">
+                            <i data-lucide="shopping-bag" class="w-7 h-7"></i>
+                        </div>
+                        <h4 class="font-serif text-2xl font-semibold text-cacau-950 mb-2">Sua sacola está vazia</h4>
+                        <p class="text-sm text-cacau-600 max-w-xs mb-6">
+                            Explore nossos entremets, tartelettes e trufas artesanais para montar sua encomenda.
+                        </p>
+                        <button onclick="closeCartDrawer()" class="px-6 py-2.5 rounded-full bg-cacau-950 text-baunilha-50 text-xs font-semibold uppercase tracking-wider">
+                            Ver Cardápio
+                        </button>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = cart.map(item => `
+                    <div class="flex items-center gap-4 p-3.5 rounded-2xl bg-white border border-cacau-900/10 shadow-sm">
+                        <img 
+                            src="${item.image}" 
+                            onerror="this.src='https://placehold.co/150x150/321F15/D4A359?text=Doce'"
+                            alt="${item.name}" 
+                            class="w-16 h-16 rounded-xl object-cover shrink-0"
+                        >
+                        <div class="flex-1 min-w-0">
+                            <h5 class="font-serif text-lg font-semibold text-cacau-950 truncate">${item.name}</h5>
+                            <p class="text-xs text-cacau-600">${formatCurrency(item.price)} cada</p>
+                            
+                            <!-- Controles de Quantidade -->
+                            <div class="flex items-center gap-3 mt-2">
+                                <button onclick="updateItemQuantity(${item.id}, -1)" aria-label="Diminuir quantidade" class="w-7 h-7 rounded-full bg-baunilha-100 hover:bg-baunilha-200 text-cacau-950 flex items-center justify-center transition-colors">
+                                    <i data-lucide="minus" class="w-3.5 h-3.5"></i>
+                                </button>
+                                <span class="text-sm font-semibold w-4 text-center">${item.quantity}</span>
+                                <button onclick="updateItemQuantity(${item.id}, 1)" aria-label="Aumentar quantidade" class="w-7 h-7 rounded-full bg-baunilha-100 hover:bg-baunilha-200 text-cacau-950 flex items-center justify-center transition-colors">
+                                    <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <span class="font-semibold text-sm text-cacau-950 block">
+                                ${formatCurrency(item.price * item.quantity)}
+                            </span>
+                        </div>
+                    </div>
+                `).join("");
+            }
+
+            subtotalEl.textContent = formatCurrency(totalPrice);
+            totalEl.textContent = formatCurrency(totalPrice);
+            lucide.createIcons();
+        }
+
+        // Abrir e Fechar Drawer do Carrinho
+        const drawerWrapper = document.getElementById("cart-drawer-wrapper");
+        const drawerBackdrop = document.getElementById("cart-backdrop");
+        const drawerPanel = document.getElementById("cart-panel");
+
+        function openCartDrawer() {
+            drawerWrapper.classList.remove("invisible", "pointer-events-none");
+            requestAnimationFrame(() => {
+                drawerBackdrop.classList.remove("opacity-0");
+                drawerPanel.classList.remove("translate-x-full");
+            });
+        }
+
+        function closeCartDrawer() {
+            drawerBackdrop.classList.add("opacity-0");
+            drawerPanel.classList.add("translate-x-full");
+            setTimeout(() => {
+                drawerWrapper.classList.add("invisible", "pointer-events-none");
+            }, 380);
+        }
+
+        // Toast Notification
+        let toastTimeout;
+        function showToast(message) {
+            const toast = document.getElementById("toast-notification");
+            const toastMsg = document.getElementById("toast-message");
+            toastMsg.textContent = message;
+
+            toast.classList.remove("opacity-0", "translate-y-4");
+            toast.classList.add("opacity-100", "translate-y-0");
+
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove("opacity-100", "translate-y-0");
+                toast.classList.add("opacity-0", "translate-y-4");
+            }, 2800);
+        }
+
+        // Animações ao Rolar (Intersection Observer)
+        function initScrollReveal() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("active");
+                    }
+                });
+            }, { threshold: 0.12 });
+
+            document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+        }
+
+        // Inicialização Geral
+        document.addEventListener("DOMContentLoaded", () => {
+            lucide.createIcons();
+            renderMenu();
+            setupCategoryFilters();
+            updateCartUI();
+            initScrollReveal();
+
+            // Eventos do Drawer
+            document.getElementById("open-cart-btn").addEventListener("click", openCartDrawer);
+            document.getElementById("close-cart-btn").addEventListener("click", closeCartDrawer);
+            drawerBackdrop.addEventListener("click", closeCartDrawer);
+
+            // Opções de Entrega no Carrinho
+            document.querySelectorAll(".delivery-option").forEach(btn => {
+                btn.addEventListener("click", () => {
+                    document.querySelectorAll(".delivery-option").forEach(b => {
+                        b.classList.remove("bg-cacau-950", "text-baunilha-50", "border-cacau-950");
+                        b.classList.add("bg-baunilha-50", "text-cacau-800", "border-cacau-900/20");
+                    });
+                    btn.classList.remove("bg-baunilha-50", "text-cacau-800", "border-cacau-900/20");
+                    btn.classList.add("bg-cacau-950", "text-baunilha-50", "border-cacau-950");
+                    selectedDeliveryMode = btn.dataset.delivery;
+                });
+            });
+
+            // Finalizar Pedido do Carrinho
+            document.getElementById("checkout-btn").addEventListener("click", () => {
+                if (cart.length === 0) return;
+
+                const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                const randomCode = "#DN-" + Math.floor(1000 + Math.random() * 9000);
+                
+                document.getElementById("order-code").textContent = randomCode;
+                document.getElementById("modal-order-summary").textContent = 
+                    `Confirmamos sua encomenda de ${formatCurrency(totalPrice)} na modalidade "${selectedDeliveryMode}". Nossa equipe já iniciou a separação artesanal.`;
+
+                closeCartDrawer();
+                const modal = document.getElementById("order-confirmation-modal");
+                modal.classList.remove("hidden");
+                modal.classList.add("flex");
+
+                // Limpar carrinho após finalizar
+                cart = [];
+                updateCartUI();
+            });
+
+            // Fechar Modal de Confirmação
+            document.getElementById("close-modal-btn").addEventListener("click", () => {
+                const modal = document.getElementById("order-confirmation-modal");
+                modal.classList.add("hidden");
+                modal.classList.remove("flex");
+            });
+
+            // Menu Mobile Toggle
+            const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+            const mobileMenu = document.getElementById("mobile-menu");
+            mobileMenuBtn.addEventListener("click", () => {
+                mobileMenu.classList.toggle("hidden");
+            });
+            document.querySelectorAll(".mobile-link").forEach(link => {
+                link.addEventListener("click", () => mobileMenu.classList.add("hidden"));
+            });
+
+            // Formulário de Encomendas Personalizadas / Eventos
+            const customOrderForm = document.getElementById("custom-order-form");
+            const successBox = document.getElementById("form-success-box");
+            const successText = document.getElementById("form-success-text");
+
+            // Definir data mínima como amanhã
+            const dateInput = document.getElementById("event-date");
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            dateInput.min = tomorrow.toISOString().split("T")[0];
+
+            customOrderForm.addEventListener("submit", (e) => {
+                e.preventDefault();
+                const name = document.getElementById("client-name").value.trim();
+                const eventType = document.getElementById("event-type").value;
+                const guests = document.getElementById("guest-count").value;
+
+                successText.textContent = `Obrigado, ${name}! Recebemos sua solicitação para "${eventType}" (${guests} convidados). Nossa chef pâtissière preparará uma proposta personalizada e retornará em breve.`;
+                
+                customOrderForm.classList.add("hidden");
+                successBox.classList.remove("hidden");
+            });
+
+            document.getElementById("reset-form-btn").addEventListener("click", () => {
+                customOrderForm.reset();
+                successBox.classList.add("hidden");
+                customOrderForm.classList.remove("hidden");
+            });
+        });
+    </script>
+</body>
+</html>
